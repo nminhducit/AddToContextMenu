@@ -1,13 +1,37 @@
 @echo off
 setlocal
 
-:: Prompt for application name and path
+:: Author Information
+echo =====================================
+echo    Script developed by NMINHDUCIT
+echo =====================================
+echo.
+
+:menu
+echo 1. Add application to context menu
+echo 2. Restore old Windows 10 context menu
+echo 3. Exit
+set /p choice=Enter your choice (1/2/3): 
+
+if "%choice%"=="1" goto add_app
+if "%choice%"=="2" goto restore_menu
+if "%choice%"=="3" goto exit
+
+:add_app
+:: Prompt for application name, path, and icon
 set /p appName=Enter the name for the context menu entry: 
 set /p appPath=Enter the full path to the application (e.g., C:\Path\To\YourApp.exe): 
+set /p iconPath=Enter the full path to the icon file (e.g., C:\Path\To\Icon.ico): 
 
 :: Verify that the file exists
 if not exist "%appPath%" (
-    echo The specified file does not exist.
+    echo The specified application file does not exist.
+    pause
+    exit /b 1
+)
+
+if not exist "%iconPath%" (
+    echo The specified icon file does not exist.
     pause
     exit /b 1
 )
@@ -15,9 +39,21 @@ if not exist "%appPath%" (
 :: Create registry entries
 set "regPath=HKEY_CLASSES_ROOT\Directory\Background\shell\%appName%"
 reg add "%regPath%" /ve /d "%appName%" /f
+reg add "%regPath%" /v "Icon" /d "%iconPath%" /f
 reg add "%regPath%\command" /ve /d "\"%appPath%\"" /f
 
-echo The context menu entry has been successfully added.
+echo The context menu entry with icon has been successfully added.
 pause
+goto menu
+
+:restore_menu
+:: Add registry entry to restore old Windows 10 context menu
+reg add "HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
+echo The old Windows 10 context menu has been restored. Please restart your computer for the changes to take effect.
+pause
+goto menu
+
+:exit
 endlocal
 exit /b 0
