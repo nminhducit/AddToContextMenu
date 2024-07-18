@@ -25,7 +25,7 @@ if "%choice%"=="3" goto exit
 :add_app
 cls
 echo =====================================
-echo   ADD APPLICATION TO CONTEXT MENU
+echo   ADD APPLICATION TO CONTEXT MENU 
 echo =====================================
 :: Prompt for application name, path, and icon
 set /p appName=Enter the name for the context menu entry: 
