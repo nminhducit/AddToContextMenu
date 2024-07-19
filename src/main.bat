@@ -2,20 +2,20 @@
 setlocal
 
 :: Author Information
-echo =====================================
-echo    Script developed by NMINHDUCIT
-echo =====================================
+echo ========================================================
+echo         ManageContextMenu Script - Version 0.1
+echo ========================================================
 echo.
 
 :menu
 cls
-echo =====================================
-echo              MAIN MENU
-echo =====================================
+echo ========================================================
+echo                       MAIN MENU
+echo ========================================================
 echo 1. Add application to context menu
 echo 2. Restore old Windows 10 context menu
 echo 3. Exit
-echo =====================================
+echo ========================================================
 set /p choice=Enter your choice (1/2/3): 
 
 if "%choice%"=="1" goto add_app
@@ -24,9 +24,9 @@ if "%choice%"=="3" goto exit
 
 :add_app
 cls
-echo =====================================
-echo   ADD APPLICATION TO CONTEXT MENU 
-echo =====================================
+echo ========================================================
+echo             ADD APPLICATION TO CONTEXT MENU 
+echo ========================================================
 :: Prompt for application name, path, and icon
 set /p appName=Enter the name for the context menu entry: 
 set /p appPath=Enter the full path to the application (e.g., C:\Path\To\YourApp.exe): 
@@ -51,17 +51,17 @@ reg add "%regPath%" /ve /d "%appName%" /f
 reg add "%regPath%" /v "Icon" /d "%iconPath%" /f
 reg add "%regPath%\command" /ve /d "\"%appPath%\"" /f
 
-echo =====================================
+echo ========================================================
 echo The context menu entry with icon has been successfully added.
-echo =====================================
+echo ========================================================
 pause
 goto menu
 
 :restore_menu
 cls
-echo =====================================
-echo  RESTORE OLD WINDOWS 10 CONTEXT MENU
-echo =====================================
+echo ========================================================
+echo            RESTORE OLD WINDOWS 10 CONTEXT MENU
+echo ========================================================
 :: Add registry entry to restore old Windows 10 context menu
 reg add "HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 
@@ -74,10 +74,10 @@ goto menu
 
 :exit
 cls
-echo =====================================
-echo            THANK YOU
-echo         FOR USING MY SCRIPT
-echo =====================================
+echo ========================================================
+echo                       THANK YOU
+echo        FOR USING MANAGECONTEXTMENU BY NMINHDUCIT
+echo ========================================================
 pause
 endlocal
 exit /b 0
