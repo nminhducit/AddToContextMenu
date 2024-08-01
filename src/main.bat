@@ -2,15 +2,14 @@
 setlocal
 
 :: Author Information
-echo ========================================================
-echo         ManageContextMenu Script - Version 0.1
-echo ========================================================
-echo.
+title ManageContextMenu Script v0.1 - NMINHDUCIT
+mode con: cols=65 lines=25
+color f0
 
 :menu
 cls
 echo ========================================================
-echo                       MAIN MENU
+echo                          MENU
 echo ========================================================
 echo 1. Add application to context menu
 echo 2. Restore old Windows 10 context menu
